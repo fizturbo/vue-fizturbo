@@ -15,9 +15,10 @@ const analysisData = ref({
 onMounted(() => {
   const chartDom = document.querySelector('.gauge-chart')
   if (chartDom) {
+    const htmlChartDom = chartDom as HTMLElement;
     const resizeObserver = new ResizeObserver(() => {
       try {
-        const chart = echarts.init(chartDom)
+        const chart = echarts.init(htmlChartDom)
         chart.setOption({
           series: [{
             type: 'gauge',
@@ -28,19 +29,21 @@ onMounted(() => {
             axisTick: { show: false },
             splitLine: { length: 15, lineStyle: { color: 'auto' } },
             axisLabel: { color: '#666', distance: -15 },
-            detail: { 
-              valueAnimation: true, 
-              fontSize: 24, 
+            detail: {
+              valueAnimation: true,
+              fontSize: 24,
               color: '#2c3e50',
               offsetCenter: [0, '80%']
             },
             data: [{ value: 66.07, name: '风险指数' }]
           }]
         })
-        chartDom.style.visibility = 'visible'
+        htmlChartDom.style.visibility = 'visible'
       } catch (error) {
         console.error('图表初始化失败:', error)
-        chartDom.innerHTML = '<div class="chart-error">图表加载失败，请刷新页面</div>'
+        if (htmlChartDom) {
+          htmlChartDom.innerHTML = '<div class="chart-error">图表加载失败，请刷新页面</div>'
+        }
       }
     })
     resizeObserver.observe(chartDom)
