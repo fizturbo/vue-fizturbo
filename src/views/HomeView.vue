@@ -1,9 +1,16 @@
+<template>
+  <div class="home-view">
+    <h1>Welcome to Home</h1>
+  </div>
+</template>
+
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+// 这里是首页组件逻辑
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style scoped>
+.home-view {
+  text-align: center;
+  padding: 2rem;
+}
+</style>
